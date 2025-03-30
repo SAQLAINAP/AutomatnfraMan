@@ -1,0 +1,15 @@
+{
+    "name": "jenkins-node-demo",
+    "version": "1.0.0",
+    "description": "A simple Node.js app for Jenkins pipeline testing",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js",
+      "test": "echo \"Simulated test success!\" && exit 0",
+      "lint": "echo \"Simulated lint success!\" && exit 0",
+      "build": "mkdir -p build && cp index.js build/"
+    },
+    "author": "Saqlain",
+    "license": "MIT"
+  }
+  

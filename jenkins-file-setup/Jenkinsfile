@@ -1,0 +1,62 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                echo 'Cloning repository...'
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                echo 'Running npm install...'
+                sh 'npm install'
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                echo 'Simulating linting step...'
+                sh 'echo "Lint Passed!"'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Simulating test step...'
+                sh 'echo "All Tests Passed!"'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Simulating build step...'
+                sh 'mkdir -p build && cp index.js build/'
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'build/**', fingerprint: true
+            }
+        }
+
+        stage('Mock Deploy') {
+            steps {
+                echo 'Mock deploy to /tmp/deploy directory...'
+                sh 'mkdir -p /tmp/deploy && cp -r build/* /tmp/deploy/'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build completed successfully!'
+        }
+        failure {
+            echo 'Build failed!'
+        }
+    }
+}
